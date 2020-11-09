@@ -1,0 +1,8 @@
+@tailwind base;
+
+html {
+  @apply antialiased bg-gray-100 text-black;
+}
+
+@tailwind components;
+@tailwind utilities;
