@@ -28,6 +28,7 @@ module.exports = {
       width: {
         2.5: '0.625rem',
         3.5: '0.925rem',
+        72: '18rem',
       },
       padding: {
         0.5: '0.125rem',

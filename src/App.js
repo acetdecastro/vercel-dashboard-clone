@@ -1,9 +1,11 @@
 import GitHubLogo from './components/GitHubLogo';
-import { ReactComponent as DotsHorizontalIcon } from 'heroicons/solid/dots-horizontal.svg';
 import ProjectCard from './components/ProjectCard';
 import ActivityFeed from './components/ActivityFeed';
 import Avatar from './components/Avatar';
 import AccountSwitcher from './components/AccountSwitcher';
+import { useState } from 'react';
+import NavMenuModal from './components/NavMenuModal';
+import FeedBackModal from './components/FeedBackModal';
 
 function VercelLogo({ className }) {
   return (
@@ -24,15 +26,32 @@ function VercelLogo({ className }) {
 
 function App() {
   document.title = 'Dashboard - Vercel';
+  const [isAccountSwitcherOpen, setIsAccountSwitcherOpen] = useState(false);
+  const [isNavMenuModalOpen, setIsNavMenuModalOpen] = useState(false);
+  const [isFeedBackModelOpen, setIsFeedBackModelOpen] = useState(false);
+
+  const handleIsAccountSwitcherOpen = () => {
+    setIsAccountSwitcherOpen(!isAccountSwitcherOpen);
+  };
+
+  const handleIsNavMenuModalOpen = () => {
+    setIsNavMenuModalOpen(!isNavMenuModalOpen);
+  };
+
+  const handleIsFeedBackModelOpen = () => {
+    setIsFeedBackModelOpen(!isFeedBackModelOpen);
+  };
 
   return (
-    <div>
+    <div id="app_container">
       <div className="bg-white">
         <header className="space-y-2 border-b border-gray-200">
           <nav className="max-w-5xl mx-auto pt-4 flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <VercelLogo className={'h-6'} />
-              <span>
+            <div className="flex items-center">
+              <a href="/">
+                <VercelLogo className={'h-6'} />
+              </a>
+              <span className="ml-2">
                 <svg
                   viewBox="0 0 32 32"
                   stroke="currentColor"
@@ -41,16 +60,17 @@ function App() {
                   <line x1="8" y1="28" x2="22" y2="4" />
                 </svg>
               </span>
-              <AccountSwitcher />
+              <AccountSwitcher
+                isAccountSwitcherOpen={isAccountSwitcherOpen}
+                handleIsAccountSwitcherOpen={handleIsAccountSwitcherOpen}
+              />
             </div>
             <div className="flex items-center text-gray-600 text-sm space-x-4">
               <div className="flex items-center space-x-5">
-                <button
-                  type="button"
-                  className="border border-gray-200 rounded px-3 py-1.5 hover:border-black transition ease-in-out duration-150"
-                >
-                  FeedBack
-                </button>
+                <FeedBackModal
+                  isFeedBackModelOpen={isFeedBackModelOpen}
+                  handleIsFeedBackModelOpen={handleIsFeedBackModelOpen}
+                />
                 <a
                   href="/"
                   className="inline-block leading-5 hover:text-gray-900 transition ease-in-out duration-150"
@@ -64,9 +84,10 @@ function App() {
                   Docs
                 </a>
               </div>
-              <button type="button" className="focus:outline-none">
-                <DotsHorizontalIcon className="h-5 w-5" />
-              </button>
+              <NavMenuModal
+                isNavMenuModalOpen={isNavMenuModalOpen}
+                handleIsNavMenuModalOpen={handleIsNavMenuModalOpen}
+              />
               <button>
                 <Avatar
                   size={'md'}
@@ -170,7 +191,7 @@ function App() {
             </a>
             <a
               href="/"
-              className="inline-flex justify-center px-6 py-2 text-sm  leading-5 font-medium bg-black border rounded border-transparent text-white hover:text-gray-900 hover:bg-white transition ease-in-out duration-150 hover:border-black"
+              className="inline-flex justify-center px-6 py-2 text-sm leading-5 font-medium bg-black border rounded border-transparent text-white hover:text-gray-900 hover:bg-white transition ease-in-out duration-150 hover:border-black"
             >
               Import Project
             </a>
@@ -183,18 +204,11 @@ function App() {
             <h2 className="sr-only">Recent Projects</h2>
             <div className="space-y-8">
               <ul className="space-y-12">
-                <li>
-                  <ProjectCard />
-                </li>
-                <li>
-                  <ProjectCard />
-                </li>
-                <li>
-                  <ProjectCard />
-                </li>
-                <li>
-                  <ProjectCard />
-                </li>
+                {[...Array(4)].map((_, index) => (
+                  <li key={index}>
+                    <ProjectCard />
+                  </li>
+                ))}
               </ul>
               <div>
                 <a

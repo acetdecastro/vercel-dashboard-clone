@@ -21,7 +21,7 @@ const ProjectCard = () => {
           >
             <a
               href="/"
-              className="inline-flex items-center space-x-2 text-sm leading-5 font-medium"
+              className="inline-flex items-center space-x-2 text-sm leading-5 font-medium hover:underline"
             >
               <span
                 aria-hidden
@@ -42,7 +42,7 @@ const ProjectCard = () => {
           >
             <a
               href="/"
-              className="inline-flex items-center space-x-2 text-sm leading-5 font-medium"
+              className="inline-flex items-center space-x-2 text-sm leading-5 font-medium hover:underline"
             >
               <span
                 aria-hidden
@@ -62,7 +62,7 @@ const ProjectCard = () => {
       <div className="px-6 py-3">
         <a
           href="/"
-          className="flex items-center space-x-1 text-sm leading-5 font-medium"
+          className="inline-flex items-center space-x-1 text-sm leading-5 font-medium hover:underline"
         >
           <GitHubLogo className={'h-5 w-5'} />
           <span>acetdecastro/next-nested-routing</span>
